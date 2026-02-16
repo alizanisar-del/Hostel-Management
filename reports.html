@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports | LuxeStay HMS</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="sidebar-logo">
+                <i class="fas fa-hotel"></i>
+                <span>LuxeStay HMS</span>
+            </a>
+        </div>
+        <div class="nav flex-column">
+            <a href="../index.html" class="nav-link">
+                <i class="fas fa-th-large"></i> Dashboard
+            </a>
+            <a href="rooms.html" class="nav-link">
+                <i class="fas fa-door-open"></i> Room Management
+            </a>
+            <a href="bookings.html" class="nav-link">
+                <i class="fas fa-calendar-check"></i> Bookings
+            </a>
+            <a href="check-in-out.html" class="nav-link">
+                <i class="fas fa-key"></i> Check-in / Out
+            </a>
+            <a href="guests.html" class="nav-link">
+                <i class="fas fa-users"></i> Guests
+            </a>
+            <a href="payments.html" class="nav-link">
+                <i class="fas fa-credit-card"></i> Payments
+            </a>
+            <a href="reports.html" class="nav-link active">
+                <i class="fas fa-chart-line"></i> Reports
+            </a>
+            <a href="settings.html" class="nav-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../logout.html" class="nav-link mt-5">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <div class="top-navbar text-end">
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=Admin" alt="Admin" class="user-img">
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <!-- Filter Row -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="table-card p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <h4 class="mb-0">Revenue & Booking Reports</h4>
+                        <div class="d-flex gap-3">
+                            <input type="month" class="form-control" value="2024-02">
+                            <button class="btn btn-outline-secondary"><i class="fas fa-print me-2"></i> Print</button>
+                            <button class="btn btn-primary"><i class="fas fa-download me-2"></i> Export Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Stats -->
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="table-card p-4 h-100">
+                        <h5 class="mb-4">Monthly Revenue Overview</h5>
+                        <canvas id="revenueChart" height="350"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="table-card p-4 h-100">
+                        <h5 class="mb-4">Booking Sources</h5>
+                        <canvas id="sourceChart" height="250"></canvas>
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-circle text-primary me-2"></i> Online Travel Agencies</span>
+                                <b>45%</b>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-circle text-success me-2"></i> Direct Bookings</span>
+                                <b>35%</b>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span><i class="fas fa-circle text-warning me-2"></i> Walk-ins</span>
+                                <b>20%</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="table-card">
+                        <div class="p-4 border-bottom">
+                            <h5 class="mb-0">Quarterly Summary (Jan - Mar 2024)</h5>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Month</th>
+                                        <th>Total Bookings</th>
+                                        <th>Occupancy Rate</th>
+                                        <th>Room Revenue</th>
+                                        <th>Other Services</th>
+                                        <th>Total Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>January</td>
+                                        <td>145</td>
+                                        <td>78%</td>
+                                        <td>$12,400</td>
+                                        <td>$1,200</td>
+                                        <td class="fw-bold">$13,600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>February</td>
+                                        <td>120</td>
+                                        <td>82%</td>
+                                        <td>$11,800</td>
+                                        <td>$1,500</td>
+                                        <td class="fw-bold">$13,300</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/buttons.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Revenue Chart
+            new Chart(document.getElementById('revenueChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [15000, 13500, 18000, 22000, 19000, 25000],
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Source Chart
+            new Chart(document.getElementById('sourceChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['OTA', 'Direct', 'Walk-in'],
+                    datasets: [{
+                        data: [45, 35, 20],
+                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

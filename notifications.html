@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications | LuxeStay HMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .notif-item {
+            padding: 20px 24px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .notif-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .notif-item.unread {
+            background-color: rgba(59, 130, 246, 0.04);
+            border-left: 3px solid #3b82f6;
+        }
+
+        .notif-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.1rem;
+        }
+
+        .notif-time {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .notif-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .notif-desc {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 0;
+        }
+
+        .filter-btn {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #3b82f6;
+            color: #fff;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="sidebar-logo">
+                <i class="fas fa-hotel"></i>
+                <span>LuxeStay HMS</span>
+            </a>
+        </div>
+        <div class="nav flex-column">
+            <a href="../index.html" class="nav-link">
+                <i class="fas fa-th-large"></i> Dashboard
+            </a>
+            <a href="rooms.html" class="nav-link">
+                <i class="fas fa-door-open"></i> Room Management
+            </a>
+            <a href="bookings.html" class="nav-link">
+                <i class="fas fa-calendar-check"></i> Bookings
+            </a>
+            <a href="check-in-out.html" class="nav-link">
+                <i class="fas fa-key"></i> Check-in / Out
+            </a>
+            <a href="guests.html" class="nav-link">
+                <i class="fas fa-users"></i> Guests
+            </a>
+            <a href="payments.html" class="nav-link">
+                <i class="fas fa-credit-card"></i> Payments
+            </a>
+            <a href="reports.html" class="nav-link">
+                <i class="fas fa-chart-line"></i> Reports
+            </a>
+            <a href="settings.html" class="nav-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../logout.html" class="nav-link mt-5">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <div class="top-navbar">
+            <div class="d-flex align-items-center">
+                <button class="btn d-lg-none me-3" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item active">All Notifications</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="nav-icons text-end">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin"
+                    class="user-img">
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                <div>
+                    <h4 class="mb-1">Notifications</h4>
+                    <p class="text-muted mb-0">You have <span class="text-primary fw-bold" id="unreadCount">5</span>
+                        unread notifications</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm" id="markAllRead">
+                    <i class="fas fa-check-double me-2"></i> Mark All as Read
+                </button>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="d-flex gap-2 mb-4 flex-wrap">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="booking">Bookings</button>
+                <button class="filter-btn" data-filter="checkout">Check-outs</button>
+                <button class="filter-btn" data-filter="maintenance">Maintenance</button>
+                <button class="filter-btn" data-filter="payment">Payments</button>
+            </div>
+
+            <!-- Notifications List -->
+            <div class="table-card" id="notificationsList">
+
+                <!-- Today -->
+                <div class="px-4 py-2 border-bottom" style="background: #f8fafc;">
+                    <small class="fw-bold text-muted text-uppercase">Today</small>
+                </div>
+
+                <div class="notif-item unread d-flex align-items-start gap-3" data-type="booking">
+                    <div class="notif-icon bg-soft-green">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">New Booking Received</div>
+                                <p class="notif-desc">Mark Wilson booked Room #105 (Single) for Feb 12 - Feb 14. Total:
+                                    $90.00</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">2 min ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notif-item unread d-flex align-items-start gap-3" data-type="checkout">
+                    <div class="notif-icon bg-soft-orange">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">Check-out Reminder</div>
+                                <p class="notif-desc">Sarah Connor (Room #202, Double) checkout is due today. Balance
+                                    remaining: $300.00</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">30 min ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notif-item unread d-flex align-items-start gap-3" data-type="maintenance">
+                    <div class="notif-icon bg-soft-red">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">Maintenance Alert — High Priority</div>
+                                <p class="notif-desc">Room #103 AC unit is not working. Guest complaint filed.
+                                    Technician assigned: Kamran Ali.</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">1 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notif-item unread d-flex align-items-start gap-3" data-type="payment">
+                    <div class="notif-icon" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">Payment Received</div>
+                                <p class="notif-desc">John Doe paid $450.00 for Room #301 (Deluxe Suite) via Credit
+                                    Card. Invoice #INV-2024-087 generated.</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notif-item unread d-flex align-items-start gap-3" data-type="booking">
+                    <div class="notif-icon bg-soft-blue">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">Walk-in Guest Checked In</div>
+                                <p class="notif-desc">New walk-in guest James Rodriguez checked into Room #110 (Single).
+                                    Expected stay: 2 nights.</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">3 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yesterday -->
+                <div class="px-4 py-2 border-bottom" style="background: #f8fafc;">
+                    <small class="fw-bold text-muted text-uppercase">Yesterday</small>
+                </div>
+
+                <div class="notif-item d-flex align-items-start gap-3" data-type="checkout">
+                    <div class="notif-icon bg-soft-green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">Successful Check-out</div>
+                                <p class="notif-desc">Emily Watson checked out of Room #204 (Double). Total bill:
+                                    $225.00 — Paid in full.</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">Yesterday, 4:30 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notif-item d-flex align-items-start gap-3" data-type="maintenance">
+                    <div class="notif-icon bg-soft-orange">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">Maintenance Completed</div>
+                                <p class="notif-desc">Room #207 plumbing issue resolved. Room is now back to "Available"
+                                    status.</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">Yesterday, 2:15 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notif-item d-flex align-items-start gap-3" data-type="booking">
+                    <div class="notif-icon bg-soft-blue">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">Booking Cancelled</div>
+                                <p class="notif-desc">Robert Brown cancelled booking for Room #112 (Feb 14 - Feb 16).
+                                    Refund of $90.00 processed.</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">Yesterday, 11:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earlier -->
+                <div class="px-4 py-2 border-bottom" style="background: #f8fafc;">
+                    <small class="fw-bold text-muted text-uppercase">Earlier This Week</small>
+                </div>
+
+                <div class="notif-item d-flex align-items-start gap-3" data-type="payment">
+                    <div class="notif-icon bg-soft-red">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">Payment Overdue</div>
+                                <p class="notif-desc">Michael Ross (Room #305) has an outstanding balance of $150.00.
+                                    Last reminder sent 2 days ago.</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">Feb 10, 9:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notif-item d-flex align-items-start gap-3" data-type="booking">
+                    <div class="notif-icon bg-soft-green">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="notif-title">Group Booking Confirmed</div>
+                                <p class="notif-desc">Corporate booking: 5 rooms (3 Double, 2 Single) reserved for
+                                    TechCorp Ltd. Check-in: Feb 15.</p>
+                            </div>
+                            <span class="notif-time text-nowrap ms-3">Feb 9, 3:45 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Filter buttons
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const notifItems = document.querySelectorAll('.notif-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.getAttribute('data-filter');
+
+                    notifItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-type') === filter) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Mark All as Read
+            document.getElementById('markAllRead').addEventListener('click', function () {
+                document.querySelectorAll('.notif-item.unread').forEach(item => {
+                    item.classList.remove('unread');
+                });
+                document.getElementById('unreadCount').textContent = '0';
+                this.innerHTML = '<i class="fas fa-check-double me-2"></i> All Read!';
+                this.classList.remove('btn-outline-primary');
+                this.classList.add('btn-success');
+            });
+
+            // Click individual notification to mark as read
+            notifItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    this.classList.remove('unread');
+                    const remaining = document.querySelectorAll('.notif-item.unread').length;
+                    document.getElementById('unreadCount').textContent = remaining;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

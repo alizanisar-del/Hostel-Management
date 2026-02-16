@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | LuxeStay HMS</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-hotel"></i>
+                <span>LuxeStay HMS</span>
+            </a>
+        </div>
+        <div class="nav flex-column">
+            <a href="index.html" class="nav-link active">
+                <i class="fas fa-th-large"></i> Dashboard
+            </a>
+            <a href="pages/rooms.html" class="nav-link">
+                <i class="fas fa-door-open"></i> Room Management
+            </a>
+            <a href="pages/bookings.html" class="nav-link">
+                <i class="fas fa-calendar-check"></i> Bookings
+            </a>
+            <a href="pages/check-in-out.html" class="nav-link">
+                <i class="fas fa-key"></i> Check-in / Out
+            </a>
+            <a href="pages/guests.html" class="nav-link">
+                <i class="fas fa-users"></i> Guests
+            </a>
+            <a href="pages/payments.html" class="nav-link">
+                <i class="fas fa-credit-card"></i> Payments
+            </a>
+            <a href="pages/reports.html" class="nav-link">
+                <i class="fas fa-chart-line"></i> Reports
+            </a>
+            <a href="pages/settings.html" class="nav-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="logout.html" class="nav-link mt-5">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Top Navbar -->
+        <div class="top-navbar">
+            <div class="d-flex align-items-center">
+                <button class="btn d-lg-none me-3" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for bookings, rooms...">
+                </div>
+            </div>
+            <div class="nav-icons">
+                <!-- Notification Bell Dropdown -->
+                <div class="dropdown">
+                    <div class="icon-btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                        role="button" id="notificationDropdown">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0 mt-3 p-0"
+                        style="width: 340px; border-radius: 12px; overflow: hidden;"
+                        aria-labelledby="notificationDropdown">
+                        <div class="p-3 border-bottom" style="background: linear-gradient(135deg, #0f172a, #1e40af);">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 text-white"><i class="fas fa-bell me-2"></i>Notifications</h6>
+                                <span class="badge bg-light text-dark">3 New</span>
+                            </div>
+                        </div>
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            <a href="#" class="dropdown-item p-3 border-bottom" style="white-space: normal;">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-shape bg-soft-green me-3"
+                                        style="min-width: 40px; height: 40px; font-size: 1rem;">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 fw-semibold" style="font-size: 0.9rem;">New Booking Received</p>
+                                        <small class="text-muted">Mark Wilson booked Room #105 (Single) for Feb
+                                            12-14.</small>
+                                        <div class="mt-1"><small class="text-primary">2 minutes ago</small></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="dropdown-item p-3 border-bottom" style="white-space: normal;">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-shape bg-soft-orange me-3"
+                                        style="min-width: 40px; height: 40px; font-size: 1rem;">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 fw-semibold" style="font-size: 0.9rem;">Check-out Reminder</p>
+                                        <small class="text-muted">Sarah Connor (Room #202) checkout is due
+                                            today.</small>
+                                        <div class="mt-1"><small class="text-primary">30 minutes ago</small></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="dropdown-item p-3" style="white-space: normal;">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-shape bg-soft-red me-3"
+                                        style="min-width: 40px; height: 40px; font-size: 1rem;">
+                                        <i class="fas fa-tools"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 fw-semibold" style="font-size: 0.9rem;">Maintenance Alert</p>
+                                        <small class="text-muted">Room #103 AC unit needs repair. Priority:
+                                            High.</small>
+                                        <div class="mt-1"><small class="text-primary">1 hour ago</small></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="p-2 text-center border-top">
+                            <a href="pages/notifications.html" class="text-primary text-decoration-none fw-semibold"
+                                style="font-size: 0.85rem;">View All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Profile Dropdown -->
+                <div class="user-profile dropdown">
+                    <div class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" role="button">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin"
+                            class="user-img me-2">
+                        <span class="d-none d-md-inline">Aliza Admin</span>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-3"
+                        style="border-radius: 12px; min-width: 200px;">
+                        <li class="px-3 py-2 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff"
+                                    class="rounded-circle me-2" width="40" height="40">
+                                <div>
+                                    <div class="fw-bold" style="font-size: 0.9rem;">Aliza Admin</div>
+                                    <small class="text-muted">Administrator</small>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a class="dropdown-item py-2" href="pages/settings.html"><i
+                                    class="fas fa-cog me-2 text-muted"></i> Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider my-1">
+                        </li>
+                        <li><a class="dropdown-item py-2 text-danger" href="logout.html"><i
+                                    class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="container-fluid">
+            <!-- Stats Row -->
+            <div class="row mb-4 g-3">
+                <div class="col-xl col-md-4 col-sm-6">
+                    <div class="stat-card d-flex align-items-center">
+                        <div class="icon-shape bg-soft-blue me-3">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1">Total Rooms</h6>
+                            <h3 class="mb-0">120</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl col-md-4 col-sm-6">
+                    <div class="stat-card d-flex align-items-center">
+                        <div class="icon-shape bg-soft-green me-3">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1">Available</h6>
+                            <h3 class="mb-0">45</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl col-md-4 col-sm-6">
+                    <div class="stat-card d-flex align-items-center">
+                        <div class="icon-shape bg-soft-red me-3">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1">Occupied</h6>
+                            <h3 class="mb-0">68</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl col-md-4 col-sm-6">
+                    <div class="stat-card d-flex align-items-center">
+                        <div class="icon-shape bg-soft-orange me-3">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1">Check-ins</h6>
+                            <h3 class="mb-0">12</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl col-md-4 col-sm-6">
+                    <div class="stat-card d-flex align-items-center">
+                        <div class="icon-shape" style="background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1">Check-outs</h6>
+                            <h3 class="mb-0">8</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Occupancy Chart -->
+                <div class="col-lg-8 mb-4">
+                    <div class="table-card p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Room Occupancy Overview</h5>
+                            <select class="form-select form-select-sm w-auto">
+                                <option>This Week</option>
+                                <option>This Month</option>
+                            </select>
+                        </div>
+                        <div style="position: relative; height: 300px; width: 100%;">
+                            <canvas id="occupancyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Status Stats -->
+                <div class="col-lg-4 mb-4">
+                    <div class="table-card p-4 h-100">
+                        <h5 class="mb-4">Room Status Breakdown</h5>
+                        <div style="position: relative; height: 200px; width: 100%;">
+                            <canvas id="roomStatusChart"></canvas>
+                        </div>
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span><i class="fas fa-circle text-success me-2" style="font-size: 0.6rem;"></i>
+                                    Available</span>
+                                <span class="fw-bold">45</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span><i class="fas fa-circle text-danger me-2" style="font-size: 0.6rem;"></i>
+                                    Occupied</span>
+                                <span class="fw-bold">68</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span><i class="fas fa-circle text-warning me-2" style="font-size: 0.6rem;"></i>
+                                    Maintenance</span>
+                                <span class="fw-bold">7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Bookings Table -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-card">
+                        <div class="p-4 d-flex justify-content-between align-items-center border-bottom">
+                            <h5 class="mb-0">Recent Bookings</h5>
+                            <a href="pages/bookings.html" class="btn btn-sm btn-primary">View All</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Guest Name</th>
+                                        <th>Room Type</th>
+                                        <th>Check-in</th>
+                                        <th>Check-out</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=random"
+                                                    class="rounded-circle me-2" width="30" alt="">
+                                                John Doe
+                                            </div>
+                                        </td>
+                                        <td>Deluxe Suite</td>
+                                        <td>Feb 12, 2024</td>
+                                        <td>Feb 15, 2024</td>
+                                        <td><span class="badge bg-soft-green text-success badge-pill">Confirmed</span>
+                                        </td>
+                                        <td><button class="btn btn-light btn-sm"><i
+                                                    class="fas fa-ellipsis-v"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=random"
+                                                    class="rounded-circle me-2" width="30" alt="">
+                                                Jane Smith
+                                            </div>
+                                        </td>
+                                        <td>Double Room</td>
+                                        <td>Feb 13, 2024</td>
+                                        <td>Feb 14, 2024</td>
+                                        <td><span class="badge bg-soft-orange text-warning badge-pill">Pending</span>
+                                        </td>
+                                        <td><button class="btn btn-light btn-sm"><i
+                                                    class="fas fa-ellipsis-v"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://ui-avatars.com/api/?name=Michael+Ross&background=random"
+                                                    class="rounded-circle me-2" width="30" alt="">
+                                                Michael Ross
+                                            </div>
+                                        </td>
+                                        <td>Single Room</td>
+                                        <td>Feb 14, 2024</td>
+                                        <td>Feb 18, 2024</td>
+                                        <td><span class="badge bg-soft-blue text-primary badge-pill">Checked In</span>
+                                        </td>
+                                        <td><button class="btn btn-light btn-sm"><i
+                                                    class="fas fa-ellipsis-v"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/buttons.js"></script>
+</body>
+
+</html>
